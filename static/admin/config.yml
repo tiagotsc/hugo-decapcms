@@ -1,0 +1,21 @@
+local_backend: false # Habilita o DecapCMS para usar localmente
+locale: 'pt' # Traduz o CMS para português. É preciso instalar o pacote npm i decap-cms-app
+backend:
+  name: git-gateway
+  branch: main # Branch que será manipulada
+media_folder: static/img # Pasta caminho absoluto onde os arquivos enviados vão residir
+public_folder: /img # Pasta caminho relativo onde os arquivos enviados vão residir
+sortable_fields: ['date', 'title'] # metadados que serão usado na ordenados
+collections:
+  - name: 'post' # Usado nas rotas do cms, ex.: /admin/collections/post
+    label: 'Postagem' # Label usada na UI
+    folder: 'content/posts' # Caminho para a pasta onde as postagens são gravadas
+    create: true # Permite que usuário criem novos documentos nessa coleção
+    slug: '{{slug}}' # Slug de artigo para URL, ex.: artigo1 que na URL ficaria tipo: http://blog.com/artigo1
+    editor:
+      preview: true # Habilita pré visualização
+    fields: # Campos que serão editados no CMS
+      - { label: 'Título', name: 'title', widget: 'string' }
+      - { label: 'Data de publicação', name: 'date', widget: 'datetime' }
+      - { label: "Rascunho", name: "draft", widget: "boolean", default: false }
+      - { label: 'Conteúdo', name: 'body', widget: 'markdown' }

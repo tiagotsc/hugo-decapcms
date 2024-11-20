@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>Gerenciador de Conteúdo</title>
+    <!-- Include  do script que habilita o Netlify Identity nesta página. usado apenas para produção -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  </head>
+  <body>
+    <!-- Include do script que constrói a aplicação DecapCMS -->
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <!-- Aplica o CSS personalizado -->
+    <script>
+      var PostPreview = createClass({
+        render: function() {
+          var entry = this.props.entry;
+          return h('div', {},
+            h('h1', {}, entry.getIn(['data', 'title'])),
+            h('div', {"className": "text"}, this.props.widgetFor('body'))
+          );
+        }
+      });
+      CMS.registerPreviewTemplate("post", PostPreview);
+      CMS.registerPreviewStyle("/admin/style.css");
+    </script>
+  </body>
+</html>
